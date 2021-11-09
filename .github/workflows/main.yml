@@ -24,7 +24,7 @@ jobs:
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
     - name: Build and Push Docker Images
       run: |
-       docker build . --file ./sendresults/Dockerfile -t reviewerscope-repo:latest
+       docker build . --file ./sendresults/Dockerfile -t reviewerscope1-repo:latest
        
     -
       name: Set up Docker Buildx
@@ -43,11 +43,12 @@ jobs:
         context: ./
         file: sendresults/Dockerfile
         push: true
-        tags: ${{ secrets.DOCKERHUB_USERNAME }}/reviewerscope-repo:latest
+        tags: ${{ secrets.DOCKERHUB_USERNAME }}/reviewerscope1-repo:latest
         
     - uses: convictional/trigger-workflow-and-wait@v1.3.0
       with:
           owner: mahesh
           repo: maheshpatamsetti/reviewerscope
           github_token: ${{ secrets.G_ACCESS_TOKEN }}
-          workflow_file_name: deploy.yml   
+          workflow_file_name: deploy.yml 
+          ref: main
