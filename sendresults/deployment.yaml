@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: sendresults-service
+  name: sendresults-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sendresults-service
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: sendresults-service
+    spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: localstorage
+                operator: In
+                values:
+                - "yes"
+      imagePullSecrets:
+      - name: regcred     
+      containers:
+      - image: docker.io/reviewerscope/reviewerscope-repo:sendresultsserviceimg${IMAGE_TAG}
+        name: reviewerscope-repo
+        volumeMounts:
+          - name: file-persistent  # This name should match the name specified in `volumes.name`
+            mountPath: /mnt/rsdata
+      volumes:                       # A PersistentVolume is mounted as a volume to the Pod 
+      - name: file-persistent
+        persistentVolumeClaim:
+          claimName: reviewerscope-claim
+             
