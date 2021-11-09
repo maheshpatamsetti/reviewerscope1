@@ -44,3 +44,10 @@ jobs:
         file: sendresults/Dockerfile
         push: true
         tags: ${{ secrets.DOCKERHUB_USERNAME }}/reviewerscope-repo:latest
+        
+    - uses: convictional/trigger-workflow-and-wait@v1.3.0
+      with:
+          owner: mahesh
+          repo: maheshpatamsetti/reviewerscope
+          github_token: ${{ secrets.G_ACCESS_TOKEN }}
+          workflow_file_name: deploy.yml   
