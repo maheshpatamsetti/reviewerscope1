@@ -50,5 +50,5 @@ jobs:
           owner: mahesh
           repo: reviewerscope
           github_token: ${{ secrets.G_ACCESS_TOKEN }}
-          workflow_file_name: deploy.yml 
+          workflow_file_name: main.yml 
           ref: main
