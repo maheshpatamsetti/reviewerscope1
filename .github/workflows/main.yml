@@ -48,8 +48,7 @@ jobs:
     - uses: convictional/trigger-workflow-and-wait@v1.3.0
       with:
           owner: mahesh
-          repo: maheshpatamsett/reviewerscope
-          path: ./sendresults
+          repo: maheshpatamsett/reviewerscope/sendresults
           github_token: ${{ secrets.G_ACCESS_TOKEN }}
           workflow_file_name: main.yml 
           ref: main
